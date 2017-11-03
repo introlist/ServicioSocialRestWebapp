@@ -1,0 +1,39 @@
+ #filtros tr,td{
+     border: 1px solid darkgray;
+
+ }
+ #filtros{
+     width: 300px;
+     border-collapse: collapse;
+ }
+
+ td + td{
+ }
+select{
+    width: 80%;
+}
+#filtros input[type=text]{
+    width: 200px;
+}
+#respuesta {
+    width: 500px;
+    padding: 1px;
+}
+ #repositorio optgroup{
+      font-size: 25px;
+      font-family: Verdana;
+  }
+ #filtros optgroup{
+     font-size: 15px;
+     font-family: Verdana;
+ }
+
+ conocimiento{
+     font-size: 30px;
+     font-family: Verdana;
+ }
+ 
+ #botones input{
+     width: 50%;
+     float: right;
+ }

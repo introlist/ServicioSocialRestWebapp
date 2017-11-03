@@ -2,24 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Repositorios Concacyt</title>
+    <link rel="stylesheet" type="text/css" href="Elegancia.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="application/javascript" src="script.js"></script>
 </head>
 <body>
 <a href="http://catalogs.repositorionacionalcti.mx/">Repositorio CONACYT</a>
-<form>
-    <p><label for="areas"><b>Areas de conocimiento:</b> </label>
-        <input type="search" id="areas" placeholder="Areas de conocimiento"></p>
-    <p><label for="campos"><b>Campos de conocimiento:</b> </label>
-        <input type="search" id="campos" placeholder="Campos de conocimiento (depende del anterior)"></p>
-    <p><label for="disciplinas"><b>Disciplinas de conocimiento:</b> </label>
-        <input type="search" id="disciplinas" placeholder="Disciplinas de conocimiento (depende del anterior)"></p>
-    <p><label for="subdisciplinas"><b>Subdisciplinas de conocimiento:</b> </label>
-        <input type="search" id="subdisciplinas" placeholder="Subdisciplinas de conocimiento (depende del anterior)"></p>
-    <p><input id="respuesta" name="respuesta"  type="text" readonly="true" placeholder="Resultado." height="300px">
+<div id="contenido">
+    <form>
+        <table id="tabla-filtros" onchange="setURL()">
+            <tr>
+                <td class="conocimiento">
+                    <select id="repositorio" class="conocimiento"  onchange="generarOpciones()">
+                        <optgroup label="REPOSITORIOS DISPONIBLES">
+                        <option id="areas" value="area" selected="selected">
+                            Áreas de conocimiento
+                        </option>
+                        <option id="campos" value="campo">
+                            Campos de conocimiento
+                        </option>
+                        <option id="disciplinas" value="disciplina">
+                            Disciplinas de conocimiento
+                        </option>
+                        <option id="subdisciplinas" value="subdisciplina">
+                            Subdisciplinas de conocimiento
+                        </option>
+                        </optgroup>
+                    </select>
+                </td>
+                <td id="cell-filtros">
+                    <select id="filtros" onchange="generarFiltros()"></select>
+                </td>
 
-        <input type="button" value="Copiar"> <input type="reset" value="Reiniciar">
-    </p>
-</form>
+            </tr>
+            <tr>
+                <td>
+                    <input id="respuesta" name="respuesta"  type="text" readonly="true" placeholder="Resultado." height="300px">
+                </td>
+
+                <td id="botones">
+                     <input id="goTo" type="button" value="Navegar" disabled="disabled" onclick="goToURL()">
+                    <input id="copy" type="button" value="Copiar" disabled="disabled" onclick="copyURL()">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <p id="estatus"></p>
+</div>
 
 </body>
 </html>
