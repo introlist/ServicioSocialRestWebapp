@@ -311,8 +311,24 @@ function setURL() {
 }
 
 function goToURL() {
-    window.open(document.getElementById("respuesta").value);
+	var responseContents = "";
+	const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
+	const url = document.getElementById("respuesta").value; 
+	fetch(proxyurl + url) 
+	.then(response => response.text())
+	.then(contents => woosh(contents))
+	.catch(console.log("Can’t access " + url + " response. Blocked by browser?"))
+}
 
+function woosh(contents){
+	var responseContents = contents
+	var jsonResponse = JSON.parse(responseContents);
+	console.log(jsonResponse)
+	alert(responseContents)
+}
+
+function printInConsole(response){
+	print(response)
 }
 
 function copyURL() {
