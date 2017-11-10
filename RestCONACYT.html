@@ -8,12 +8,20 @@
     <script type="application/javascript" src="script.js"></script>
 </head>
 <body>
+
+<p>
+<a href="http://catalogs.repositorionacionalcti.mx/">
+<img border="0" alt="Repositorio CONACYT" src="http://catalogs.repositorionacionalcti.mx/img/conacyt-logo.png" width="200" height="100">
+</a>
+</p>
+
 <a href="http://catalogs.repositorionacionalcti.mx/">Repositorio CONACYT</a>
+
 <div id="contenido">
     <form>
-        <table id="tabla-filtros" onchange="setURL()">
+        <table id="tabla-filtros" onchange="setURL()" class="paleBlueRows">
             <tr>
-                <td class="conocimiento">
+                <td class="styled-select blue semi-square">
                     <select id="repositorio" class="conocimiento"  onchange="generarOpciones()">
                         <optgroup label="REPOSITORIOS DISPONIBLES">
                         <option id="areas" value="area" selected="selected">
@@ -31,7 +39,7 @@
                         </optgroup>
                     </select>
                 </td>
-                <td id="cell-filtros">
+                <td id="cell-filtros" class="styled-select blue semi-square">
                     <select id="filtros" onchange="generarFiltros()"></select>
                 </td>
 
