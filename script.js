@@ -328,7 +328,7 @@ function generateFirstCombo() {
 	var responseContents = "";
 	const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
 	const url = "http://catalogs.repositorionacionalcti.mx/webresources/areacono"
-	fetch(proxyurl + url) 
+	fetch(proxyurl + url)
 	.then(response => response.text())
 	.then(contents => woosh(contents))
 	.catch(console.log("Can’t access " + url + " response. Blocked by browser?"))
@@ -343,7 +343,7 @@ function generateSecondCombo(areasConocimiento) {
 	var responseContents = "";
 	const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
 	const url = "http://catalogs.repositorionacionalcti.mx/webresources/campocono/byArea/"+selectedValue;
-	fetch(proxyurl + url) 
+	fetch(proxyurl + url)
 	.then(response => response.text())
 	.then(contents => woosh2(contents))
 	.catch(console.log("Can’t access " + url + " response. Blocked by browser?"))
@@ -385,8 +385,8 @@ function generateForthCombo(disciplinasConocimiento) {
 function goToURL() {
 	var responseContents = "";
 	const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
-	const url = document.getElementById("respuesta").value; 
-	fetch(proxyurl + url) 
+	const url = document.getElementById("respuesta").value;
+	fetch(proxyurl + url)
 	.then(response => response.text())
 	.then(contents => woosh(contents))
 	.catch(console.log("Can’t access " + url + " response. Blocked by browser?"))
@@ -400,11 +400,11 @@ function woosh(contents){
 	//console.log("\{\"campos\":"+JSON.stringify(jsonResponse)+"\}");
     //jsonString = "\{\"campos\":"+JSON.stringify(jsonResponse)+"\}";
      var listItems = '<option selected="selected" value="0">- Áreas de conocimiento -</option>';
- 
+
       for (var i = 0; i < jsonResponse.campos.length; i++) {
              listItems += "<option value='" + jsonResponse.campos[i].idArea + "'>" + jsonResponse.campos[i].descripcion + "</option>";
          }
- 
+
          $("#areasConocimiento").html(listItems);
 }
 
@@ -416,11 +416,11 @@ function woosh2(contents){
 	//console.log("\{\"campos\":"+JSON.stringify(jsonResponse)+"\}");
     //jsonString = "\{\"campos\":"+JSON.stringify(jsonResponse)+"\}";
      var listItems = '<option selected="selected" value="0">- Campos de conocimiento -</option>';
- 
+
       for (var i = 0; i < jsonResponse.campos.length; i++) {
              listItems += "<option value='" + jsonResponse.campos[i].idCampo + "'>" + jsonResponse.campos[i].descripcion + "</option>";
          }
- 
+
          $("#camposConocimiento").html(listItems);
 }
 
