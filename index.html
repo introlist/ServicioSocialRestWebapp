@@ -22,44 +22,26 @@
         <table id="tabla-filtros" onchange="setURL()" class="paleBlueRows">
             <tr>
                 <td class="styled-select blue semi-square">
-                    <select id="repositorio" class="conocimiento"  onchange="generarOpciones()">
-                        <optgroup label="REPOSITORIOS DISPONIBLES">
-                        <option id="areas" value="area" selected="selected">
-                            Áreas de conocimiento
-                        </option>
-                        <option id="campos" value="campo">
-                            Campos de conocimiento
-                        </option>
-                        <option id="disciplinas" value="disciplina">
-                            Disciplinas de conocimiento
-                        </option>
-                        <option id="subdisciplinas" value="subdisciplina">
-                            Subdisciplinas de conocimiento
-                        </option>
-                        </optgroup>
-                    </select>
-                    <select id="areasConocimiento" onchange="generateSecondCombo(this)"></select>
-                    <select id="camposConocimiento" onchange="generateThirdCombo(this)"></select>
-                    <select id="disciplinasConocimiento" onchange="generateForthCombo(this)"></select>
-                </td>
-                <td id="cell-filtros" class="styled-select blue semi-square">
-                    <select id="filtros" onchange="generarFiltros()"></select>
-                </td>
-
-            </tr>
-            <tr>
-                <td>
-                    <input id="respuesta" name="respuesta"  type="text" readonly="true" placeholder="Resultado." height="300px">
-                </td>
-
-                <td id="botones">
-                     <input id="goTo" type="button" value="Navegar" disabled="disabled" onclick="goToURL()">
-                    <input id="copy" type="button" value="Copiar" disabled="disabled" onclick="copyURL()">
+                    <div id="acc">
+                        <select id="areasConocimiento" onchange="generateSecondCombo(this)" style='width:100%;'></select>
+                    </div>
+                    <div id="ccc">
+                        <select id="camposConocimiento" onchange="generateThirdCombo(this)" style='width:100%;'></select>
+                    </div>
+                    <div id="dcc">
+                        <select id="disciplinasConocimiento" style='width:100%;'></select>
+                    </div>
                 </td>
             </tr>
         </table>
     </form>
     <p id="estatus"></p>
+</div>
+
+<div id="inputs">
+    <input id="respuesta" name="respuesta"  type="text" readonly="true" placeholder="Resultado.">
+    <input id="goTo" type="button" value="Navegar" disabled="disabled" onclick="goToURL()">
+    <input id="copy" type="button" value="Copiar" disabled="disabled" onclick="copyURL()">
 </div>
     
 </body>
