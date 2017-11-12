@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Repositorios Concacyt</title>
+    <link rel="stylesheet" type="text/css" href="Elegancia.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="application/javascript" src="script.js"></script>
+</head>
+<body>
+
+<p>
+<a href="http://catalogs.repositorionacionalcti.mx/">
+<img border="0" alt="Repositorio CONACYT" src="http://catalogs.repositorionacionalcti.mx/img/conacyt-logo.png" width="200" height="100">
+</a>
+</p>
+
+<a href="http://catalogs.repositorionacionalcti.mx/">Repositorio CONACYT</a>
+
+<div id="contenido">
+    <form>
+        <table id="tabla-filtros" onchange="setURL()" class="paleBlueRows">
+            <tr>
+                <td class="styled-select blue semi-square">
+                    <select id="repositorio" class="conocimiento"  onchange="generarOpciones()">
+                        <optgroup label="REPOSITORIOS DISPONIBLES">
+                        <option id="areas" value="area" selected="selected">
+                            Áreas de conocimiento
+                        </option>
+                        <option id="campos" value="campo">
+                            Campos de conocimiento
+                        </option>
+                        <option id="disciplinas" value="disciplina">
+                            Disciplinas de conocimiento
+                        </option>
+                        <option id="subdisciplinas" value="subdisciplina">
+                            Subdisciplinas de conocimiento
+                        </option>
+                        </optgroup>
+                    </select>
+                </td>
+                <td id="cell-filtros" class="styled-select blue semi-square">
+                    <select id="filtros" onchange="generarFiltros()"></select>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <input id="respuesta" name="respuesta"  type="text" readonly="true" placeholder="Resultado." height="300px">
+                </td>
+
+                <td id="botones">
+                     <input id="goTo" type="button" value="Navegar" disabled="disabled" onclick="goToURL()">
+                    <input id="copy" type="button" value="Copiar" disabled="disabled" onclick="copyURL()">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <p id="estatus"></p>
+</div>
+
+</body>
+</html>
