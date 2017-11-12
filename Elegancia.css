@@ -79,7 +79,7 @@ select{
 .yellow select  { color: #000; }
 .black select   { color: #fff; }
 
-
+/*
    border: 0;
    color: #EEE;
    background: transparent;
@@ -91,6 +91,7 @@ select{
    *background: #58B14C;
    -webkit-appearance: none;
 }
+*/
 
 #mainselection {
    overflow:hidden;
