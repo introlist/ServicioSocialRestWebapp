@@ -8,7 +8,7 @@ var responseContents;
 var jsonResponse;
 var jsonString;
 const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
-const urlCono = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/" ;
+const urlAreas = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/" ;
 window.onload = function () {
     generateFirstCombo();
 };
@@ -31,7 +31,7 @@ function showURL(urlCons) {
 
 function generateFirstCombo() {
 	var responseContents = "";
-	fetch(proxyurl + urlCono) 
+	fetch(proxyurl + urlAreas)
 	.then(response => response.text())
 	.then(contents => fillFirstCombo(contents))
 	.catch(console.log(""))
@@ -49,7 +49,7 @@ function generateSecondCombo(areasConocimiento) {
     
     /*
     var input = document.createElement("input");
-    input.value= urlCono + selectedValue
+    input.value= urlAreas + selectedValue
     var parent = document.getElementById("acc");
     parent.appendChild(input);
     
@@ -60,10 +60,10 @@ function generateSecondCombo(areasConocimiento) {
     parent.appendChild(input);
     */
     
-    generateInputs(selectedValue,"acc","areasConocimiento");
+    generateInputs(selectedValue,"acc","areasConocimiento",urlAreas);
 }
 
-function generateInputs(selectedValue,urlIn,textIn){
+function generateInputs(selectedValue,urlIn,textIn,urlCono){
     var input = document.createElement("input");
     input.value= "<dc:subject>"+urlCono + selectedValue+"</dc:subject>";
     var parent = document.getElementById(urlIn);
@@ -73,7 +73,7 @@ function generateInputs(selectedValue,urlIn,textIn){
     var input = document.createElement("input");
     var select_val = document.getElementById(textIn);
     input.value = select_val.options[select_val.selectedIndex].text;
-    var parent = document.getElementById("acc");
+    var parent = document.getElementById(urlIn);
     parent.appendChild(input);
 }
 
@@ -81,11 +81,14 @@ function generateThirdCombo(camposConocimiento) {
     var selectedText = camposConocimiento.options[camposConocimiento.selectedIndex].innerHTML;
     var selectedValue = camposConocimiento.value;
 	var responseContents = "";
-	const url = "http://catalogs.repositorionacionalcti.mx/webresources/disciplinacono/byCampo/"+selectedValue;
+
+    const url = "http://catalogs.repositorionacionalcti.mx/webresources/disciplinacono/byCampo/"+selectedValue;
 	fetch(proxyurl + url) 
 	.then(response => response.text())
 	.then(contents => fillThirdCombo(contents))
-	.catch(console.log(""))
+	.catch(console.log(""));
+
+    generateInputs(selectedValue,"ccc","camposConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/campocono/");
 }
 function generateForthCombo(disciplinasConocimiento) {
     var selectedText = disciplinasConocimiento.options[disciplinasConocimiento.selectedIndex].innerHTML;
@@ -101,6 +104,14 @@ function generateForthCombo(disciplinasConocimiento) {
 .catch(console.log("Can’t access " + url + " response. Blocked by browser?"))
     //generateFirstCombo();
     showURL(url);
+    generateInputs(selectedValue,"dcc","disciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/disciplinacono/");
+
+}
+
+function generateLastInputs(subdisciplinasConocimiento){
+    var selectedValue = subdisciplinasConocimiento.value;
+    generateInputs(selectedValue,"scc","subdisciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/subdisciplinacono/");
+
 }
 
 function goToURL() {

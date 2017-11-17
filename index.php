@@ -37,7 +37,7 @@ echo "<div id=\"urlContent\" style=\"display: none;\">". $página_inicio;
                         <select id="disciplinasConocimiento" onchange="generateForthCombo(this)" style='width:100%;'></select>
                     </div>
                     <div id="scc">
-                        <select id="subdisciplinasConocimiento" style='width:100%;'></select>
+                        <select id="subdisciplinasConocimiento" onchange="generateLastInputs(this);" style='width:100%;'></select>
                     </div>
                 </td>
             </tr>
