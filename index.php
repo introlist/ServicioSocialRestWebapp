@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Repositorios Concacyt</title>
     <link rel="stylesheet" type="text/css" href="Elegancia.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="application/javascript" src="script.js"></script>
+    <input id="url" style="display: none;">
 </head>
 <body>
-
+<!--?php
+$página_inicio = file_get_contents('http://catalogs.repositorionacionalcti.mx/webresources/');
+echo "<div id=\"urlContent\" style=\"display: none;\">". $página_inicio;
+?-->
 <p>
 <a href="http://catalogs.repositorionacionalcti.mx/">
 <img border="0" alt="Repositorio CONACYT" src="http://catalogs.repositorionacionalcti.mx/img/conacyt-logo.png" width="200" height="100">

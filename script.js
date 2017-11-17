@@ -8,7 +8,7 @@ var responseContents;
 var jsonResponse;
 var jsonString;
 const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
-const urlCono = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/"
+const urlCono = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/" ;
 window.onload = function () {
     generateFirstCombo();
 };
@@ -65,9 +65,10 @@ function generateSecondCombo(areasConocimiento) {
 
 function generateInputs(selectedValue,urlIn,textIn){
     var input = document.createElement("input");
-    input.value= urlCono + selectedValue
+    input.value= "<dc:subject>"+urlCono + selectedValue+"</dc:subject>";
     var parent = document.getElementById(urlIn);
     parent.appendChild(input);
+    parent.append("    ");
     
     var input = document.createElement("input");
     var select_val = document.getElementById(textIn);
@@ -116,7 +117,7 @@ function goToURL() {
 *   Fill next select
 */
 function fillFirstCombo(contents){
-	responseContents = contents
+	responseContents = contents;
 	jsonResponse = JSON.parse("\{\"campos\":"+responseContents+"\}");
     console.log(contents)
      var listItems = '<option selected="selected" value="0">- Áreas de conocimiento -</option>';

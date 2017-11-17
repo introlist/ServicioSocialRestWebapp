@@ -75,7 +75,7 @@ select{
 
 .slate select   { color: #000; }
 .green select   { color: #fff; }
-.blue select    { color: #fff; }
+.blue select    { color: #000000; }
 .yellow select  { color: #000; }
 .black select   { color: #fff; }
 
