@@ -7,7 +7,7 @@ var originalNoFilter;
 var responseContents;
 var jsonResponse;
 var jsonString;
-const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
+const proxyurl = "http://localhost/ss/Webservice.php?ws="; // <- Esta madre hace la magia
 const urlAreas = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/" ;
 window.onload = function () {
     generateFirstCombo();
@@ -31,6 +31,7 @@ function showURL(urlCons) {
 
 function generateFirstCombo() {
 	var responseContents = "";
+	console.log(proxyurl + urlAreas)
 	fetch(proxyurl + urlAreas)
 	.then(response => response.text())
 	.then(contents => fillFirstCombo(contents))
@@ -95,7 +96,7 @@ function generateForthCombo(disciplinasConocimiento) {
     var selectedValue = disciplinasConocimiento.value;
     console.log(selectedValue);
     var responseContents = "";
-    const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
+    //const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
     const url = "http://catalogs.repositorionacionalcti.mx/webresources/subdisciplinacono/byDisciplina/"+selectedValue;
     console.log(url);
     fetch(proxyurl + url)
@@ -116,7 +117,7 @@ function generateLastInputs(subdisciplinasConocimiento){
 
 function goToURL() {
 	var responseContents = "";
-	const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
+	//const proxyurl = "https://cors-anywhere.herokuapp.com/"; // <- Esta madre hace la magia
 	const url = document.getElementById("respuesta").value; 
 	fetch(proxyurl + url) 
 	.then(response => response.text())
