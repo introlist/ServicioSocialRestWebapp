@@ -1,0 +1,15 @@
+input {
+    color: whitesmoke; !important;
+}
+
+input[type=button]{
+    /*color: black;*/
+    float: right;
+}
+.hide-on-med-and-down li a{
+    color: #003D79;
+}
+
+.hr-repos{
+    border-color: dodgerblue;
+}
