@@ -5,8 +5,9 @@ var dccSelects = 0;
 var sccSelects = 0;
 var responseContents;
 var jsonResponse;
-const proxyurl = "http://localhost:63342/ServicioSocialRestWebapp/Webservice.php?ws=";
+const proxyurl = "http://localhost/ssrwa/Webservice.php?ws=";
 const urlAreas = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/";
+
 
 
 window.onload = function () {
@@ -99,19 +100,19 @@ function generateInputs(selectedValue, dropdown, titulo, jsonURL) {
     var id = dropdown + (getSelectionNumber(dropdown));
     var parent = document.getElementById(dropdown);
     var select_val = document.getElementById(titulo);
-    var dspace = "<input id='dspace" + id + "' value='<dc:subject>" + jsonURL + selectedValue + "</dc:subject>' readonly>";
-    var copyDspace = ("<input  class=\"waves-effect waves-light btn\"  id=\"copyDspace" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('dspace" + id + "')\">\n");
-    var nombre = "<input id='nombre" + id + "' value='" + select_val.options[select_val.selectedIndex].text + "' readonly>";
-    var copyNombre = ("<input  class=\"waves-effect waves-light btn\"  id=\"copyNombre" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('nombre" + id + "')\">\n");
+    var nombre = "<input id='nombre" + id + "' type='text' class='col s10 gen-input-small-text' value='" + select_val.options[select_val.selectedIndex].text + "' readonly>";
+    var copyNombre = ("<input  class=' gen-input waves-effect waves-light btn'  id=\"copyNombre" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('nombre" + id + "')\">\n");
 
-    parent.insertAdjacentHTML('beforeend', dspace);
-    parent.insertAdjacentHTML('beforeend', copyDspace);
-    parent.append("    ");
+    var dspace = "<input id='dspace" + id + "' type='text' class='col s10  gen-input-small-text'  value='<dc:subject>" + jsonURL + selectedValue + "</dc:subject>' readonly>";
+    var copyDspace = ("<input  class='gen-input waves-effect waves-light btn'  id=\"copyDspace" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('dspace" + id + "')\">\n");
     parent.insertAdjacentHTML('beforeend', nombre);
     parent.insertAdjacentHTML('beforeend', copyNombre);
     parent.append("    ");
-    parent.insertAdjacentHTML('beforeend', "<br><br>");
+    parent.insertAdjacentHTML('beforeend', dspace);
+    parent.insertAdjacentHTML('beforeend', copyDspace);
+    parent.append("    ");
 
+    parent.insertAdjacentHTML('beforeend', "<br><br>");
 
 }
 
@@ -205,5 +206,5 @@ function copyURL(elementID) {
     } catch (err) {
         console.log('Oops, unable to copy');
     }
-    Materialize.toast('Texto copiado al portapapeles.', 3000) // 4000 is the duration of the toast
+    Materialize.toast('Texto copiado al portapapeles.', 3000) // 3000 is the duration of the toast
 }

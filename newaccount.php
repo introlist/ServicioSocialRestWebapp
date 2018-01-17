@@ -9,47 +9,75 @@ if ($conn->connect_error) {
     '</script>';
     die("Connection failed: " . $conn->connect_error);
 }
+
+
 session_start();
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form
-
-
-    $username =  strtolower($_POST['username']);
+    $username = strtolower($_POST['username']);
     $password = $_POST['password'];
+    $password_repeat = $_POST['pw_rpt'];
+
+
+    if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["pw_rpt"])) {
+        echo '<script type="text/javascript">',
+        'setTimeout(function(){
+        Materialize.toast(\'No se rellenaron todos los campos necesarios.\', 4000)
+        }, 500);',
+        '</script>';
+    }
 
     $sql = "SELECT * FROM users WHERE login = '$username'";
 
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        $row = $result->fetch_array(MYSQLI_ASSOC);
-        if (($password == $row['password'])) {
-            $_SESSION['loggedin'] = true;
-            $_SESSION['username'] = $username;
-            $_SESSION['start'] = time();
-            $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+        $username = '';
+        echo '<script type="text/javascript">',
+        'setTimeout(function(){
+        Materialize.toast(\'Ya existe un usuario registrado con ese nombre.\', 4000)
+        }, 500);',
+        '</script>';
+    }
+else{
 
-            echo "Bienvenido! " . $_SESSION['username'];
-            header("location: repositories.php");
+    $sql = "INSERT INTO users (login, password) VALUES( '$username', '$password')";
 
-
-        } else {
+    if ($password == $password_repeat){
+        if ($conn->query($sql) === TRUE) {
             echo '<script type="text/javascript">',
             'setTimeout(function(){
- Materialize.toast(\'Intente de nuevo por favor.\', 2500)
-}, 1000);',
+            Materialize.toast(\'Se creo el nuevo registro en el sistema.\', 3000)
+            }, 1000);',
+            '</script>';
+            header("location: index.php");
+
+        }
+            else {
+             echo '<script type="text/javascript">',
+            'setTimeout(function(){
+                Materialize.toast(\'Error '. $sql . '<br>' . $conn->error .' \', 2500)}, 1000);',
             '</script>';
         }
+
     }else{
         echo '<script type="text/javascript">',
         'setTimeout(function(){
- Materialize.toast(\'No existe registro de esa cuenta en el sistema.\', 2500)
-}, 500);',
+        Materialize.toast(\'Las contraseñas no coinciden.\', 4000)
+        }, 500);',
         '</script>';
     }
 }
+
+
+
+}
+
+
 mysqli_close($conn);
 ?>
+
+
 <html>
 
 <head>
@@ -65,14 +93,13 @@ mysqli_close($conn);
 <div class="section"></div>
 <main>
     <center>
-        <img class="responsive-img" style=" height: 133px;" src="img/user-icon.svg" />
         <div class="section"></div>
 
-        <h5 class="indigo-text">Introduzca sus credenciales para acceder a la aplicación</h5>
+        <h2 class="indigo-text">Crear una nueva cuenta</h2>
         <div class="section"></div>
 
         <div class="container">
-            <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+            <div class="z-depth-5 grey lighten-4 row" style="display: inline-block; width: 50%; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
                 <form class="col s12" method="post">
                     <div class='row'>
@@ -87,26 +114,32 @@ mysqli_close($conn);
                         </div>
                     </div>
 
-                    <div class='row'>
-                        <div class='input-field col s12'>
+                    <div class='row' >
+                        <div class='input-field col s12' >
                             <input class='validate' type='password' name='password' id='password' required/>
                             <label for='password'>Ingrese su contraseña</label>
                         </div>
-                        <label disabled="disabled" style='float: right;'>
-                            <b class="pink-text">Demo</b>
-                        </label>
+                    </div>
+
+                    <div class='row' >
+                        <div class='input-field col s12' >
+                            <input class='validate' type='password' name='pw_rpt' id='pw_rpt' required/>
+                            <label for='password'>Ingrese nuevamente su contraseña</label>
+                        </div>
                     </div>
 
                     <br />
                     <center>
                         <div class='row'>
-                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Iniciar Sesión</button>
+                            <a href="index.php">                            <button type='button' name='btn_login' class='col s5 btn btn-large waves-effect materialize-red'>Cancelar</button>
+                            </a>
+                            <div class="col s2"></div>
+                            <button type='submit' name='btn_login' class='col s5 btn btn-large waves-effect indigo'>Registrarse</button>
                         </div>
                     </center>
                 </form>
             </div>
         </div>
-        <a href="newaccount.php">Crear una nueva cuenta</a>
     </center>
     <div style = "font-size:11px; color:#cc0000; margin-top:10px"</div>
     <div class="section"></div>

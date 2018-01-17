@@ -2,14 +2,52 @@ input {
     color: whitesmoke; !important;
 }
 
-input[type=button]{
-    /*color: black;*/
-    float: right;
+.repo{
+padding-bottom: 3%;
+}
+
+.gen-input{
+    float: right; !important;
+}
+
+.gen-input-small-text{
+    font-size: small;
+    width: 80%; !important;
 }
 .hide-on-med-and-down li a{
     color: #003D79;
 }
 
+.hide-on-med-and-down li span{
+    color: #003D79;
+}
 .hr-repos{
-    border-color: dodgerblue;
+    color: dodgerblue; !important;
+}
+
+.ssrwa-login body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: #f0f0f0;
+}
+
+.ssrwa-login main {
+    flex: 1 0 auto;
+}
+
+
+.ssrwa-login.input-field input[type=date]:focus + label,
+.ssrwa-login.input-field input[type=text]:focus + label,
+.ssrwa-login.input-field input[type=email]:focus + label,
+.ssrwa-login .input-field input[type=password]:focus + label {
+    color: #e91e63;
+}
+
+.ssrwa-login .input-field input[type=date]:focus,
+.ssrwa-login .input-field input[type=text]:focus,
+.ssrwa-login .input-field input[type=email]:focus,
+.ssrwa-login .input-field input[type=password]:focus {
+    border-bottom: 2px solid #e91e63;
+    box-shadow: none;
 }
