@@ -5,7 +5,7 @@ var dccSelects = 0;
 var sccSelects = 0;
 var responseContents;
 var jsonResponse;
-const proxyurl = "http://localhost/ssrwa/Webservice.php?ws=";
+const proxyurl =  window.location.origin + "/ssrwa/app/Webservice.php?ws=";
 const urlAreas = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/";
 
 

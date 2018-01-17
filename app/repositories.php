@@ -11,12 +11,12 @@ if ( $_SESSION['loggedin'] != true){
     <meta charset="UTF-8">
     <title>Repositorios Concacyt</title>
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="css/materialize.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/materialize.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- Compiled and minified JavaScript -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script type="application/javascript" src="js/script.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/materialize.js"></script>
+    <script type="application/javascript" src="../js/script.js"></script>
 
     <input id="url" style="display: none;">
     <nav>
@@ -34,8 +34,8 @@ if ( $_SESSION['loggedin'] != true){
             <ul id="nav-mobile" class="right hide-on-med-and-down" >
                 <li><a   href="http://catalogs.repositorionacionalcti.mx/">Repositorio CONACYT</a></li>
                 <li><a   href="http://www.matematicas.uady.mx/">Facultad de Matemáticas</a></li>
-                <li><a href="#"><img src="img/user-icon.svg" height="80%" style="vertical-align: middle "> &nbsp;&nbsp;  <?php  echo ucfirst($_SESSION['username']) ?></a></li>
-                <li><a   href="logout.php/">Cerrar Sesión</a></li>
+                <li><a href="#"><img src="../img/user-icon.svg" height="80%" style="vertical-align: middle "> &nbsp;&nbsp;  <?php  echo ucfirst($_SESSION['username']) ?></a></li>
+                <li><a   href="logout.php">Cerrar Sesión</a></li>
 
             </ul>
         </div>

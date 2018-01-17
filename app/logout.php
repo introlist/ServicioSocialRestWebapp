@@ -11,7 +11,7 @@ $_SESSION['loggedin'] = false;
 unset ($_SESSION['username']);
 session_destroy();
 
-header('Location: http://localhost/ssrwa/index.php');
+header('Location: http://localhost/ssrwa/app/index.php');
 
 
 ?>

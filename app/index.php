@@ -54,10 +54,10 @@ mysqli_close($conn);
 
 <head>
 
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/materialize.min.css">
 
 </head>
 
@@ -65,7 +65,7 @@ mysqli_close($conn);
 <div class="section"></div>
 <main>
     <center>
-        <img class="responsive-img" style=" height: 133px;" src="img/user-icon.svg" />
+        <img class="responsive-img" style=" height: 133px;" src="../img/user-icon.svg" />
         <div class="section"></div>
 
         <h5 class="indigo-text">Introduzca sus credenciales para acceder a la aplicación</h5>
