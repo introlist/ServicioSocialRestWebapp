@@ -7,7 +7,8 @@ input[type=button]{
     float: right;
 }
 .hide-on-med-and-down li a{
-    color: #003D79;
+    color: #FFF;
+	/*color: #003D79*/
 }
 
 .hr-repos{

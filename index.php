@@ -14,20 +14,22 @@
 
     <input id="url" style="display: none;">
     <nav>
-        <div class="nav-wrapper" style="background: #f0f0f0">
-
+        <div class="nav-wrapper" style="background: #444444" >
+			<!-- #f0f0f0 -->
 
             <a href="http://redi.uady.mx/">
-                <img border="0" alt="REDI UADY"  src="https://www.seleccion.uady.mx/posgrado/images/escudo.png" height="100%">
+				<!-- <img border="0" alt="REDI UADY"  src="https://www.seleccion.uady.mx/posgrado/images/escudo.png" height="100%"> -->
+                <img border="0" alt="REDI UADY"  src="resources/images/uady-logo.png" height="100%">
             </a>
             <a href="http://catalogs.repositorionacionalcti.mx/">
-                <img border="0" alt="Repositorio CONACYT"  src="http://catalogs.repositorionacionalcti.mx/img/conacyt-logo.png" height="100%">
+			<!-- <img border="0" alt="Repositorio CONACYT"  src="http://catalogs.repositorionacionalcti.mx/img/conacyt-logo.png" height="100%"> -->
+                <img border="0" alt="Repositorio CONACYT"  src="resources/images/conacyt-logo.png" height="100%">
             </a>
 
 
             <ul id="nav-mobile" class="right hide-on-med-and-down" >
                 <li><a   href="http://catalogs.repositorionacionalcti.mx/">Repositorio CONACYT</a></li>
-                <li><a   href="http://www.uady.mx/">Uady.mx</a></li>
+                <li><a   href="http://www.uady.mx/">UADY</a></li>
                 <li><a   href="http://www.matematicas.uady.mx/">Facultad de Matemáticas</a></li>
             </ul>
         </div>
@@ -36,8 +38,8 @@
 
 
 </head>
-<body style="background: #D59F0F">
-
+<body style="background: #F0F0F0">
+<!-- #D59F0F -->
 <br>
 <br>
 
