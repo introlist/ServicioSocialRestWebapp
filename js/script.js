@@ -1,11 +1,15 @@
 var url = "";
-var accSelects = 0;
-var cccSelects = 0;
-var dccSelects = 0;
-var sccSelects = 0;
+var accSelectsNum = 0;
+var cccSelectsNum = 0;
+var dccSelectsNum = 0;
+var sccSelectsNum = 0;
+var accSelects = [];
+var cccSelects = [];
+var dccSelects = [];
+var sccSelects = [];
 var responseContents;
 var jsonResponse;
-const proxyurl = "http://localhost/ServicioSocialRestWebapp/Webservice.php?ws=";
+const proxyurl = window.location.origin+"/SSRWA/Webservice.php?ws=";
 const urlAreas = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/";
 
 
@@ -97,43 +101,105 @@ function selectSubdisciplina(subdisciplina) {
 
 function generateInputs(selectedValue, dropdown, titulo, jsonURL) {
     var id = dropdown + (getSelectionNumber(dropdown));
-    var parent = document.getElementById(dropdown);
+    var parent = document.getElementById(dropdown+"Results");
     var select_val = document.getElementById(titulo);
-    var dspace = "<input id='dspace" + id + "' value='<dc:subject>" + jsonURL + selectedValue + "</dc:subject>' readonly>";
-    var copyDspace = ("<input  class=\"waves-effect waves-light btn\"  id=\"copyDspace" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('dspace" + id + "')\">\n");
-    var nombre = "<input id='nombre" + id + "' value='" + select_val.options[select_val.selectedIndex].text + "' readonly>";
-    var copyNombre = ("<input  class=\"waves-effect waves-light btn\"  id=\"copyNombre" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('nombre" + id + "')\">\n");
+    var item = "";
+    var nombre = "<input id='nombre" + id + "' type='text' class='col s10 small gen-input-small-text' value='" + select_val.options[select_val.selectedIndex].text + "' readonly>";
+    var copyNombre = ("<input  class=' gen-input waves-effect waves-light btn'  id=\"copyNombre" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('nombre" + id + "')\">\n");
 
-    parent.insertAdjacentHTML('beforeend', dspace);
-    parent.insertAdjacentHTML('beforeend', copyDspace);
-    parent.append("    ");
-    parent.insertAdjacentHTML('beforeend', nombre);
-    parent.insertAdjacentHTML('beforeend', copyNombre);
-    parent.append("    ");
-    parent.insertAdjacentHTML('beforeend', "<br><br>");
+    var dspace = "<input id='dspace" + id + "' type='text' class='col s10 small gen-input-small-text'  value='<dc:subject>" + jsonURL + selectedValue + "</dc:subject>' readonly>";
+    var copyDspace = ("<input  class='gen-input waves-effect waves-light btn'  id=\"copyDspace" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('dspace" + id + "')\">\n");
 
+    item+=(nombre);
+    item+=(copyNombre);
+    item+=("    ");
+    item+=(dspace);
+    item+=(copyDspace);
+    item+=("    ");
+    item+=("<br><br>");
+    setSelection(dropdown, item);
 
+    parent.innerHTML = (getSelections(dropdown));
+    checkResultCards();
 }
+
+
 
 function getSelectionNumber(dropdown) {
     if (dropdown === "acc") {
-        accSelects++;
+        accSelectsNum++;
+        return accSelectsNum;
+    }
+    else if (dropdown === "ccc") {
+        cccSelectsNum++;
+        return cccSelectsNum;
+    }
+    else if (dropdown === "dcc") {
+        dccSelectsNum++;
+        return dccSelectsNum;
+    }
+    else {
+        sccSelectsNum++;
+        return sccSelectsNum;
+    }
+}
+
+function setSelection(dropdown, item) {
+    if (dropdown === "acc") {
+        accSelects.push(item);
+    }
+    else if (dropdown === "ccc") {
+        cccSelects.push(item);
+    }
+    else if (dropdown === "dcc") {
+        dccSelects.push(item);
+    }
+    else {
+        sccSelects.push(item);
+    }
+}
+
+function getSelections(dropdown) {
+    if (dropdown === "acc") {
         return accSelects;
     }
     else if (dropdown === "ccc") {
-        cccSelects++;
         return cccSelects;
     }
     else if (dropdown === "dcc") {
-        dccSelects++;
         return dccSelects;
     }
     else {
-        sccSelects++;
         return sccSelects;
     }
 }
 
+function checkResultCards(){
+    if(accSelectsNum > 0){
+        document.getElementById("accResults").style.display = "inline";
+    }else {
+        document.getElementById("accResults").style.display = "none";
+    }
+
+    if(cccSelectsNum > 0){
+        document.getElementById("cccResults").style.display = "inline";
+    }else {
+        document.getElementById("cccResults").style.display = "none";
+    }
+
+    if(dccSelectsNum > 0){
+        document.getElementById("dccResults").style.display = "inline";
+    }else {
+        document.getElementById("dccResults").style.display = "none";
+    }
+
+    if(sccSelectsNum > 0){
+        document.getElementById("sccResults").style.display = "inline";
+    }else {
+        document.getElementById("sccResults").style.display = "none";
+    }
+
+}
 function fillFirstCombo(contents) {
     responseContents = contents;
     jsonResponse = JSON.parse("\{\"campos\":" + responseContents + "\}");

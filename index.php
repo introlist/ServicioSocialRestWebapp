@@ -52,38 +52,36 @@
                     <table id="tabla-filtros">
                         <tr>
                             <td>
-                                <div id="acc" name="acc" class="input-field">
+                                <div id="acc" name="acc" class=" row input-field">
 
                                     <select id="areasConocimiento" onchange="selectArea(this);">
                                     </select>
                                     <label>Areas</label>
+                                    <div class="card-panel" id="accResults" style="display: none"></div>
                                 </div>
-                                <br style="padding-top: 5%">
-                                <hr class="hr-repos">
-                                <br>
-                                <div id="ccc" class="input-field">
+                                <hr class=" row hr-repos">
+                                <div id="ccc" class="row input-field">
 
                                     <select id="camposConocimiento" onchange="selectCampo(this)" ></select>
                                     <label >Campos</label>
-                                </div>
-                                <br style="padding-top: 5%">
-                                <hr class="hr-repos">
-                                <br>
-                                <div id="dcc" class="input-field">
-                                    <select id="disciplinasConocimiento" onchange="selectDisciplina(this)"></select>
-                                    <label >Disc</label>
-                                </div>
-                                <br style="padding-top: 5%">
-                                <hr class="hr-repos">
-                                <br>
-                                <div id="scc" class="input-field">
-                                    <select id="subdisciplinasConocimiento" onchange="selectSubdisciplina(this);"></select>
-                                    <label >Subdisc</label>
+                                    <div class="card-panel" id="cccResults" style="display: none"></div>
 
                                 </div>
-                                <br style="padding-top: 5%">
-                                <hr class="hr-repos">
-                                <br>
+                                <hr class=" row hr-repos">
+                                <div id="dcc" class=" row input-field">
+                                    <select id="disciplinasConocimiento" onchange="selectDisciplina(this)"></select>
+                                    <label >Disc</label>
+                                    <div class="card-panel" id="dccResults" style="display: none"></div>
+
+                                </div>
+                                <hr class="row hr-repos">
+                                <div id="scc" class=" row input-field">
+                                    <select id="subdisciplinasConocimiento" onchange="selectSubdisciplina(this);"></select>
+                                    <label >Subdisc</label>
+                                    <div class="card-panel" id="sccResults" style="display: none"></div>
+
+                                </div>
+                                <hr class=" row hr-repos">
 
                             </td>
                         </tr>

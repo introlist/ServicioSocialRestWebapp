@@ -2,6 +2,20 @@ input {
     color: whitesmoke; !important;
 }
 
+.repo{
+    padding-bottom: 3%;
+}
+
+.gen-input{
+    float: right; !important;
+}
+
+.gen-input-small-text{
+    padding-left: 5%;
+    background-color: gainsboro; !important;
+    font-size: small; !important;
+    width: 80%; !important;
+}
 input[type=button]{
     /*color: black;*/
     float: right;
@@ -9,6 +23,10 @@ input[type=button]{
 .hide-on-med-and-down li a{
     color: #FFF;
 	/*color: #003D79*/
+}
+.hide-on-med-and-down li span{
+    color: #FFF;
+    /*color: #003D79*/
 }
 
 .hr-repos{
