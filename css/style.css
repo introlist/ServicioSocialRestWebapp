@@ -10,6 +10,24 @@ input {
     float: right; !important;
 }
 
+.card-panel-card{
+	/*background-color: #003D79;*/
+	background-color: #003D79;
+	
+}
+
+.card-panel-result{
+	/*background-color: #8583be;*/
+	background-color: #686afd;
+	overflow: auto
+	
+}
+
+.card-panel{
+	background-color: #003D79;
+	overflow: auto
+}
+
 .gen-input-small-text{
     padding-left: 5%;
     background-color: gainsboro; !important;

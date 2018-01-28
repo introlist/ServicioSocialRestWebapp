@@ -53,33 +53,36 @@
                         <tr>
                             <td>
                                 <div id="acc" name="acc" class=" row input-field">
-
-                                    <select id="areasConocimiento" onchange="selectArea(this);">
+                                    <div class="card-panel-card" id="accResults-card" style="display: block">
+									<select id="areasConocimiento" onchange="selectArea(this);">
                                     </select>
                                     <label>Areas</label>
-                                    <div class="card-panel" id="accResults" style="display: none"></div>
+									<div class="card-panel" id="accResults" style="display: none"></div>
+									</div>
                                 </div>
                                 <hr class=" row hr-repos">
                                 <div id="ccc" class="row input-field">
-
+									<div class="card-panel-card" id="ccsResults-card" style="display: block">
                                     <select id="camposConocimiento" onchange="selectCampo(this)" ></select>
                                     <label >Campos</label>
                                     <div class="card-panel" id="cccResults" style="display: none"></div>
-
+									</div>
                                 </div>
                                 <hr class=" row hr-repos">
                                 <div id="dcc" class=" row input-field">
+									<div class="card-panel-card" id="dccResults-card" style="display: block">
                                     <select id="disciplinasConocimiento" onchange="selectDisciplina(this)"></select>
                                     <label >Disc</label>
                                     <div class="card-panel" id="dccResults" style="display: none"></div>
-
+									<div>
                                 </div>
                                 <hr class="row hr-repos">
                                 <div id="scc" class=" row input-field">
+									<div class="card-panel-card" id="sccResults-card" style="display: block">
                                     <select id="subdisciplinasConocimiento" onchange="selectSubdisciplina(this);"></select>
                                     <label >Subdisc</label>
                                     <div class="card-panel" id="sccResults" style="display: none"></div>
-
+									<div>
                                 </div>
                                 <hr class=" row hr-repos">
 

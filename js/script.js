@@ -9,7 +9,7 @@ var dccSelects = [];
 var sccSelects = [];
 var responseContents;
 var jsonResponse;
-const proxyurl = window.location.origin+"/SSRWA/Webservice.php?ws=";
+const proxyurl =  "http://localhost/ServicioSocialRestWebapp/Webservice.php?ws=";
 const urlAreas = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/";
 
 
@@ -104,19 +104,22 @@ function generateInputs(selectedValue, dropdown, titulo, jsonURL) {
     var parent = document.getElementById(dropdown+"Results");
     var select_val = document.getElementById(titulo);
     var item = "";
+	var card = "<div class='card-panel-result' style='display: block'>";
     var nombre = "<input id='nombre" + id + "' type='text' class='col s10 small gen-input-small-text' value='" + select_val.options[select_val.selectedIndex].text + "' readonly>";
     var copyNombre = ("<input  class=' gen-input waves-effect waves-light btn'  id=\"copyNombre" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('nombre" + id + "')\">\n");
 
     var dspace = "<input id='dspace" + id + "' type='text' class='col s10 small gen-input-small-text'  value='<dc:subject>" + jsonURL + selectedValue + "</dc:subject>' readonly>";
     var copyDspace = ("<input  class='gen-input waves-effect waves-light btn'  id=\"copyDspace" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('dspace" + id + "')\">\n");
 
+	item+=(card);
     item+=(nombre);
     item+=(copyNombre);
     item+=("    ");
     item+=(dspace);
     item+=(copyDspace);
     item+=("    ");
-    item+=("<br><br>");
+    item+=("</div>");
+	console.log(item);
     setSelection(dropdown, item);
 
     parent.innerHTML = (getSelections(dropdown));
@@ -176,25 +179,25 @@ function getSelections(dropdown) {
 
 function checkResultCards(){
     if(accSelectsNum > 0){
-        document.getElementById("accResults").style.display = "inline";
+        document.getElementById("accResults").style.display = "block";
     }else {
         document.getElementById("accResults").style.display = "none";
     }
 
     if(cccSelectsNum > 0){
-        document.getElementById("cccResults").style.display = "inline";
+        document.getElementById("cccResults").style.display = "block";
     }else {
         document.getElementById("cccResults").style.display = "none";
     }
 
     if(dccSelectsNum > 0){
-        document.getElementById("dccResults").style.display = "inline";
+        document.getElementById("dccResults").style.display = "block";
     }else {
         document.getElementById("dccResults").style.display = "none";
     }
 
     if(sccSelectsNum > 0){
-        document.getElementById("sccResults").style.display = "inline";
+        document.getElementById("sccResults").style.display = "block";
     }else {
         document.getElementById("sccResults").style.display = "none";
     }
@@ -271,5 +274,5 @@ function copyURL(elementID) {
     } catch (err) {
         console.log('Oops, unable to copy');
     }
-    Materialize.toast('Texto copiado al portapapeles.', 3000) // 4000 is the duration of the toast
+    Materialize.toast('Texto copiado al portapapeles.', 500) // 4000 is the duration of the toast
 }
