@@ -1,5 +1,9 @@
-input {
+.selects{
     color: whitesmoke; !important;
+}
+
+.results {
+    color: #003D79 !important;
 }
 
 .repo{
@@ -18,14 +22,14 @@ input {
 
 .card-panel-result{
 	/*background-color: #8583be;*/
-	background-color: #686afd;
-	overflow: auto
-	
+	background-color: whitesmoke;
+	overflow: auto;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .card-panel{
 	background-color: #003D79;
-	overflow: auto
 }
 
 .gen-input-small-text{

@@ -7,6 +7,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/materialize.js"></script>
@@ -42,8 +43,11 @@
 <!-- #D59F0F -->
 <br>
 <br>
-
-
+<div class="fixed-action-btn" >
+    <a onclick="getInput()" class="btn-floating btn-large waves-effect waves-light red tooltipped" data-position="left" data-delay="20" data-tooltip="Insertar los datos de la última selección">
+        <i class="material-icons">add</i>
+    </a>
+</div>
 <div id="contenido" class="containter">
     <div class="row">
         <div style="padding-left: 20%; padding-right: 20%; padding-bottom: 10%" >
@@ -54,34 +58,34 @@
                             <td>
                                 <div id="acc" name="acc" class=" row input-field">
                                     <div class="card-panel-card" id="accResults-card" style="display: block">
-									<select id="areasConocimiento" onchange="selectArea(this);">
+									<select id="areasConocimiento" class="selects"  onchange="selectArea(this);">
                                     </select>
-                                    <label>Areas</label>
-									<div class="card-panel" id="accResults" style="display: none"></div>
+                                    <label for="areasConocimiento">Áreas de conocimiento</label>
+									<div class="card-panel-result" id="accResults" style="display: none"></div>
 									</div>
                                 </div>
                                 <hr class=" row hr-repos">
                                 <div id="ccc" class="row input-field">
 									<div class="card-panel-card" id="ccsResults-card" style="display: block">
-                                    <select id="camposConocimiento" onchange="selectCampo(this)" ></select>
-                                    <label >Campos</label>
-                                    <div class="card-panel" id="cccResults" style="display: none"></div>
+                                    <select id="camposConocimiento" class="selects"  onchange="selectCampo(this)" ></select>
+                                    <label for="camposConocimiento">Campos de conocimiento</label>
+                                    <div class="card-panel-result" id="cccResults" style="display: none"></div>
 									</div>
                                 </div>
                                 <hr class=" row hr-repos">
                                 <div id="dcc" class=" row input-field">
 									<div class="card-panel-card" id="dccResults-card" style="display: block">
-                                    <select id="disciplinasConocimiento" onchange="selectDisciplina(this)"></select>
-                                    <label >Disc</label>
-                                    <div class="card-panel" id="dccResults" style="display: none"></div>
+                                    <select id="disciplinasConocimiento" class="selects"  onchange="selectDisciplina(this)"></select>
+                                    <label for="disciplinasConocimiento">Disciplinas de conocimiento</label>
+                                    <div class="card-panel-result" id="dccResults" style="display: none"></div>
 									<div>
                                 </div>
                                 <hr class="row hr-repos">
                                 <div id="scc" class=" row input-field">
 									<div class="card-panel-card" id="sccResults-card" style="display: block">
-                                    <select id="subdisciplinasConocimiento" onchange="selectSubdisciplina(this);"></select>
-                                    <label >Subdisc</label>
-                                    <div class="card-panel" id="sccResults" style="display: none"></div>
+                                    <select id="subdisciplinasConocimiento" class="selects" onchange="selectSubdisciplina(this);"></select>
+                                    <label for="subdisciplinasConocimiento">Subdisciplina de conocimiento</label>
+                                    <div class="card-panel-result" id="sccResults" style="display: none"></div>
 									<div>
                                 </div>
                                 <hr class=" row hr-repos">

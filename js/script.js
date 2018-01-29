@@ -3,13 +3,18 @@ var accSelectsNum = 0;
 var cccSelectsNum = 0;
 var dccSelectsNum = 0;
 var sccSelectsNum = 0;
+var accDeletes = 0;
+var cccDeletes = 0;
+var dccDeletes = 0;
+var sccDeletes = 0;
 var accSelects = [];
 var cccSelects = [];
 var dccSelects = [];
 var sccSelects = [];
 var responseContents;
 var jsonResponse;
-const proxyurl =  "http://localhost/ServicioSocialRestWebapp/Webservice.php?ws=";
+var lastSelection = [];
+const proxyurl =  "http://" + document.location.host + "/ServicioSocialRestWebapp/Webservice.php?ws=";
 const urlAreas = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/";
 
 
@@ -19,6 +24,7 @@ window.onload = function () {
 
 $(document).ready(function () {
     $('select').material_select();
+    $('.tooltipped').tooltip({delay: 50});
 });
 
 
@@ -56,7 +62,7 @@ function selectArea(areasConocimiento) {
                 });
         });
 
-    generateInputs(selectedValue, "acc", "areasConocimiento", urlAreas);
+    lastSelection = [selectedValue, "acc", "areasConocimiento", urlAreas];
 }
 
 
@@ -73,7 +79,7 @@ function selectCampo(camposConocimiento) {
                     console.log(reason + "Can’t access " + url + " response. Blocked by browser?")
                 });
         });
-    generateInputs(selectedValue, "ccc", "camposConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/campocono/");
+    lastSelection = [selectedValue, "ccc", "camposConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/campocono/"];
 
 }
 
@@ -90,42 +96,77 @@ function selectDisciplina(disciplina) {
                     console.log(reason + "Can’t access " + url + " response. Blocked by browser?")
                 });
         });
-    generateInputs(selectedValue, "dcc", "disciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/disciplinacono/");
+    lastSelection = [selectedValue, "dcc", "disciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/disciplinacono/"];
 }
 
 function selectSubdisciplina(subdisciplina) {
     var selectedValue = subdisciplina.value;
-    generateInputs(selectedValue, "scc", "subdisciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/subdisciplinacono/");
+    lastSelection = [selectedValue, "scc", "subdisciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/subdisciplinacono/"];
 
 }
 
+function getInput() {
+    if (lastSelection.length > 0){
+        generateInputs(lastSelection[0],lastSelection[1],lastSelection[2],lastSelection[3]);
+    }else {
+        Materialize.toast('Debe seleccionar alguna lista para obtener su información.', 2200); // 4000 is the duration of the toast
+    }
+
+    lastSelection = [];
+}
+
 function generateInputs(selectedValue, dropdown, titulo, jsonURL) {
-    var id = dropdown + (getSelectionNumber(dropdown));
+    var addNumber = getSelectionNumber(dropdown);
+    var id = dropdown + (addNumber);
     var parent = document.getElementById(dropdown+"Results");
     var select_val = document.getElementById(titulo);
     var item = "";
-	var card = "<div class='card-panel-result' style='display: block'>";
-    var nombre = "<input id='nombre" + id + "' type='text' class='col s10 small gen-input-small-text' value='" + select_val.options[select_val.selectedIndex].text + "' readonly>";
+
+    var nombre = "<input id='nombre" + id + "' type='text' class='results col s10 small gen-input-small-text' value='" + select_val.options[select_val.selectedIndex].text + "' readonly>";
     var copyNombre = ("<input  class=' gen-input waves-effect waves-light btn'  id=\"copyNombre" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('nombre" + id + "')\">\n");
 
-    var dspace = "<input id='dspace" + id + "' type='text' class='col s10 small gen-input-small-text'  value='<dc:subject>" + jsonURL + selectedValue + "</dc:subject>' readonly>";
-    var copyDspace = ("<input  class='gen-input waves-effect waves-light btn'  id=\"copyDspace" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('dspace" + id + "')\">\n");
+    var dspace = "<input id='dspace" + id + "' type='text' class='results col s10 small gen-input-small-text'  value='<dc:subject>" + jsonURL + selectedValue + "</dc:subject>' readonly>";
+    var copyDspace = ("<input  class='gen-input waves-effect waves-light btn'  id=\"copyDspace" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('dspace" + id + "')\">\n<br>");
 
-	item+=(card);
+    var deleteRepo = "<br><input id='delete" + id + "' type='button' value='Eliminar' class=\"waves-effect waves-teal btn-flat\" onclick='deleteRepo(\""+dropdown.toString()+"\","+addNumber+")' >";
+
     item+=(nombre);
     item+=(copyNombre);
     item+=("    ");
     item+=(dspace);
     item+=(copyDspace);
     item+=("    ");
-    item+=("</div>");
+    item+=(deleteRepo);
 	console.log(item);
+
+
     setSelection(dropdown, item);
 
     parent.innerHTML = (getSelections(dropdown));
     checkResultCards();
 }
 
+function deleteRepo(dropdown, number) {
+    var parent = document.getElementById(dropdown+"Results");
+    if (dropdown === "acc") {
+        accDeletes++;
+        accSelects[number-1] = "";
+    }
+    else if (dropdown === "ccc") {
+        cccDeletes++;
+        cccSelects[number-1] = "";
+    }
+    else if (dropdown === "dcc") {
+        dccDeletes++;
+        dccSelects[number-1] = "";
+    }
+    else {
+        sccDeletes++;
+        sccSelects[number-1] = "";
+    }
+    parent.innerHTML = (getSelections(dropdown));
+    checkResultCards();
+}
 
 
 function getSelectionNumber(dropdown) {
@@ -164,39 +205,40 @@ function setSelection(dropdown, item) {
 
 function getSelections(dropdown) {
     if (dropdown === "acc") {
-        return accSelects;
+        return accSelects.join("");
     }
     else if (dropdown === "ccc") {
-        return cccSelects;
+        return cccSelects.join("");
     }
     else if (dropdown === "dcc") {
-        return dccSelects;
+        return dccSelects.join("");
     }
     else {
-        return sccSelects;
+        return sccSelects.join("");
     }
 }
 
+
 function checkResultCards(){
-    if(accSelectsNum > 0){
+    if(accSelectsNum - accDeletes > 0){
         document.getElementById("accResults").style.display = "block";
     }else {
         document.getElementById("accResults").style.display = "none";
     }
 
-    if(cccSelectsNum > 0){
+    if(cccSelectsNum - cccDeletes  > 0){
         document.getElementById("cccResults").style.display = "block";
     }else {
         document.getElementById("cccResults").style.display = "none";
     }
 
-    if(dccSelectsNum > 0){
+    if(dccSelectsNum - dccDeletes > 0){
         document.getElementById("dccResults").style.display = "block";
     }else {
         document.getElementById("dccResults").style.display = "none";
     }
 
-    if(sccSelectsNum > 0){
+    if(sccSelectsNum - sccDeletes > 0){
         document.getElementById("sccResults").style.display = "block";
     }else {
         document.getElementById("sccResults").style.display = "none";
@@ -207,7 +249,7 @@ function fillFirstCombo(contents) {
     responseContents = contents;
     jsonResponse = JSON.parse("\{\"campos\":" + responseContents + "\}");
     console.log(contents);
-    var listItems = '<option selected="selected" value="0">- Áreas de conocimiento -</option>';
+    var listItems = '<option selected="selected" disabled="disabled" value="0">Seleccione un área de conocimiento.</option>';
 
     for (var i = 0; i < jsonResponse.campos.length; i++) {
         listItems += "<option value='" + jsonResponse.campos[i].idArea + "'>" + jsonResponse.campos[i].descripcion + "</option>";
@@ -221,7 +263,7 @@ function fillSecondCombo(contents) {
     responseContents = contents;
     jsonResponse = JSON.parse("\{\"campos\":" + responseContents + "\}");
     console.log(contents);
-    var listItems = '<option selected="selected" value="0">- Campos de conocimiento -</option>';
+    var listItems = '<option selected="selected" disabled="disabled" value="0">Seleccione un campo de conocimiento.</option>';
 
     for (var i = 0; i < jsonResponse.campos.length; i++) {
         listItems += "<option value='" + jsonResponse.campos[i].idCampo + "'>" + jsonResponse.campos[i].descripcion + "</option>";
@@ -237,7 +279,7 @@ function fillThirdCombo(contents) {
     jsonResponse = JSON.parse("\{\"campos\":" + responseContents + "\}");
     console.log(contents);
 
-    var listItems = '<option selected="selected" value="0">- Disciplinas de conocimiento -</option>';
+    var listItems = '<option selected="selected" disabled="disabled" value="0">Seleccione una disciplina de conocimiento</option>';
 
     for (var i = 0; i < jsonResponse.campos.length; i++) {
         listItems += "<option value='" + jsonResponse.campos[i].idDisciplina + "'>" + jsonResponse.campos[i].descripcion + "</option>";
@@ -253,7 +295,7 @@ function fillForthCombo(contents) {
     responseContents = contents;
     jsonResponse = JSON.parse("\{\"campos\":" + responseContents + "\}");
     console.log('Subdisciplinas\n' + contents);
-    var listItems = '<option selected="selected" value="0">- Subdisciplinas de conocimiento -</option>';
+    var listItems = '<option selected="selected" disabled="disabled" value="0">Seleccione una subdisciplina de conocimiento</option>';
 
     for (var i = 0; i < jsonResponse.campos.length; i++) {
         listItems += "<option value='" + jsonResponse.campos[i].idSubdisciplina + "'>" + jsonResponse.campos[i].descripcion + "</option>";
