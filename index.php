@@ -43,7 +43,7 @@
 <!-- #D59F0F -->
 <br>
 <br>
-<div class="fixed-action-btn" >
+<div class="fixed-action-btn top right" >
     <a onclick="getInput()" class="btn-floating btn-large waves-effect waves-light red tooltipped" data-position="left" data-delay="20" data-tooltip="Insertar los datos de la última selección">
         <i class="material-icons">add</i>
     </a>

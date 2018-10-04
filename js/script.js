@@ -14,7 +14,7 @@ var sccSelects = [];
 var responseContents;
 var jsonResponse;
 var lastSelection = [];
-const proxyurl =  "http://" + document.location.host + "/ServicioSocialRestWebapp/Webservice.php?ws=";
+const proxyurl =  "http://" + document.location.host + "/ssrwa/Webservice.php?ws=";
 const urlAreas = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/";
 
 
