@@ -49,6 +49,7 @@ function getAreas() {
 }
 
 function selectArea(areasConocimiento) {
+    shineAddButton();
     var selectedValue = areasConocimiento.value;
     const url = "http://catalogs.repositorionacionalcti.mx/webresources/campocono/byArea/" + selectedValue;
     console.log(url);
@@ -67,6 +68,7 @@ function selectArea(areasConocimiento) {
 
 
 function selectCampo(camposConocimiento) {
+    shineAddButton();
     var selectedValue = camposConocimiento.value;
     const url = "http://catalogs.repositorionacionalcti.mx/webresources/disciplinacono/byCampo/" + selectedValue;
     console.log(url);
@@ -83,7 +85,8 @@ function selectCampo(camposConocimiento) {
 
 }
 
-function selectDisciplina(disciplina) {
+function selectDisciplina(disciplina){
+    shineAddButton();
     var selectedValue = disciplina.value;
     const url = "http://catalogs.repositorionacionalcti.mx/webresources/subdisciplinacono/byDisciplina/" + selectedValue;
     console.log(url);
@@ -100,6 +103,7 @@ function selectDisciplina(disciplina) {
 }
 
 function selectSubdisciplina(subdisciplina) {
+    shineAddButton();
     var selectedValue = subdisciplina.value;
     lastSelection = [selectedValue, "scc", "subdisciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/subdisciplinacono/"];
 
@@ -189,6 +193,7 @@ function getSelectionNumber(dropdown) {
 }
 
 function setSelection(dropdown, item) {
+    shineAddButton();
     if (dropdown === "acc") {
         accSelects.push(item);
     }
@@ -306,6 +311,14 @@ function fillForthCombo(contents) {
 
 }
 
+
+function   shineAddButton(){
+    console.log("shining");
+    $("#add-button").animate({opacity:0.5}, 250, function () {
+        console.log("shined");
+        $("#add-button").animate({opacity:1}, 100);
+    });
+}
 
 function copyURL(elementID) {
     document.getElementById(elementID).select();

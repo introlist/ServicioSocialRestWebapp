@@ -44,7 +44,7 @@
 <br>
 <br>
 <div class="fixed-action-btn-mod" >
-    <a onclick="getInput()" class="btn-floating btn-large waves-effect waves-light red tooltipped" data-position="left" data-delay="20" data-tooltip="Insertar los datos de la última selección">
+    <a  id="add-button" name="add-button" onclick="getInput()" class="btn-floating btn-large waves-effect waves-light red tooltipped" data-position="left" data-delay="20" data-tooltip="Insertar los datos de la última selección">
         <i class="material-icons">add</i>
     </a>
 </div>
