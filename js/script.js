@@ -16,7 +16,7 @@ var jsonResponse;
 var lastSelection = [];
 const proxyurl =  "http://" + document.location.host + "/ssrwa/Webservice.php?ws=";
 const urlAreas = "http://catalogs.repositorionacionalcti.mx/webresources/areacono/";
-
+const metaDataString = "info:eu-repo/classification/cti/";
 
 window.onload = function () {
     getAreas();
@@ -50,7 +50,9 @@ function getAreas() {
 
 function selectArea(areasConocimiento) {
     shineAddButton();
-    var selectedValue = areasConocimiento.value;
+    console.log("selectArea", areasConocimiento);
+    var selectedArray =  areasConocimiento.value.split(",");
+    var selectedValue = selectedArray[0]; //area ID
     const url = "http://catalogs.repositorionacionalcti.mx/webresources/campocono/byArea/" + selectedValue;
     console.log(url);
     fetch(proxyurl + url)
@@ -62,14 +64,15 @@ function selectArea(areasConocimiento) {
                     console.log(reason + "Can’t access " + url + " response. Blocked by browser?")
                 });
         });
-
-    lastSelection = [selectedValue, "acc", "areasConocimiento", urlAreas];
+    //area CVE
+    lastSelection = [selectedArray[1], "acc", "areasConocimiento", urlAreas];
 }
 
 
 function selectCampo(camposConocimiento) {
     shineAddButton();
-    var selectedValue = camposConocimiento.value;
+    var selectedArray =  camposConocimiento.value.split(",");
+    var selectedValue = selectedArray[0]; //areaId
     const url = "http://catalogs.repositorionacionalcti.mx/webresources/disciplinacono/byCampo/" + selectedValue;
     console.log(url);
     fetch(proxyurl + url)
@@ -81,13 +84,15 @@ function selectCampo(camposConocimiento) {
                     console.log(reason + "Can’t access " + url + " response. Blocked by browser?")
                 });
         });
-    lastSelection = [selectedValue, "ccc", "camposConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/campocono/"];
+    //area cve
+    lastSelection = [selectedArray[1], "ccc", "camposConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/campocono/"];
 
 }
 
-function selectDisciplina(disciplina){
+function selectDisciplina(disciplinaConocimiento){
     shineAddButton();
-    var selectedValue = disciplina.value;
+    var selectedArray =  disciplinaConocimiento.value.split(",");
+    var selectedValue = selectedArray[0];
     const url = "http://catalogs.repositorionacionalcti.mx/webresources/subdisciplinacono/byDisciplina/" + selectedValue;
     console.log(url);
     fetch(proxyurl + url)
@@ -99,19 +104,19 @@ function selectDisciplina(disciplina){
                     console.log(reason + "Can’t access " + url + " response. Blocked by browser?")
                 });
         });
-    lastSelection = [selectedValue, "dcc", "disciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/disciplinacono/"];
+    lastSelection = [selectedArray[1], "dcc", "disciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/disciplinacono/"];
 }
 
-function selectSubdisciplina(subdisciplina) {
+function selectSubdisciplina(subdisciplinaConocimiento) {
     shineAddButton();
-    var selectedValue = subdisciplina.value;
-    lastSelection = [selectedValue, "scc", "subdisciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/subdisciplinacono/"];
+    var selectedArray =  subdisciplinaConocimiento.value.split(",");
+    lastSelection = [selectedArray[1], "scc", "subdisciplinasConocimiento", "http://catalogs.repositorionacionalcti.mx/webresources/subdisciplinacono/"];
 
 }
 
 function getInput() {
     if (lastSelection.length > 0){
-        generateInputs(lastSelection[0],lastSelection[1],lastSelection[2],lastSelection[3]);
+        generateMetaDataCard(lastSelection[0],lastSelection[1],lastSelection[2],lastSelection[3]);
     }else {
         Materialize.toast('Debe seleccionar alguna lista para obtener su información.', 2200); // 4000 is the duration of the toast
     }
@@ -119,32 +124,36 @@ function getInput() {
     lastSelection = [];
 }
 
-function generateInputs(selectedValue, dropdown, titulo, jsonURL) {
+function generateMetaDataCard(selectedValue, dropdown, titulo, jsonURL) {
     var addNumber = getSelectionNumber(dropdown);
     var id = dropdown + (addNumber);
     var parent = document.getElementById(dropdown+"Results");
     var select_val = document.getElementById(titulo);
-    var item = "";
+    var cardHTML = "";
 
-    var nombre = "<input id='nombre" + id + "' type='text' class='results col s10 small gen-input-small-text' value='" + select_val.options[select_val.selectedIndex].text + "' readonly>";
-    var copyNombre = ("<input  class=' gen-input waves-effect waves-light btn'  id=\"copyNombre" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('nombre" + id + "')\">\n");
+    var nombreTextBox = "<input id='nombre" + id + "' type='text' class='results col s10 small gen-input-small-text' value='" + select_val.options[select_val.selectedIndex].text + "' readonly>";
+    var copyNombreButton = ("<input  class=' gen-in put waves-effect waves-light btn'  id=\"copyNombre" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('nombre" + id + "')\">\n");
 
-    var dspace = "<input id='dspace" + id + "' type='text' class='results col s10 small gen-input-small-text'  value='<dc:subject>" + jsonURL + selectedValue + "</dc:subject>' readonly>";
-    var copyDspace = ("<input  class='gen-input waves-effect waves-light btn'  id=\"copyDspace" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('dspace" + id + "')\">\n<br>");
+    var dspaceTextBox = "<input id='dspace" + id + "'" +
+        " type='text' class='results col s10 small gen-input-small-text'" +
+        " value='"+metaDataString+
+        + selectedValue + "' " +
+        " readonly>";
+    var copyDspaceButton = ("<input  class='gen-input waves-effect waves-light btn'  id=\"copyDspace" + id + "\" type=\"button\" value=\"Copiar\" onclick=\"copyURL('dspace" + id + "')\">\n<br>");
 
-    var deleteRepo = "<br><input id='delete" + id + "' type='button' value='Eliminar' class=\"waves-effect waves-teal btn-flat\" onclick='deleteRepo(\""+dropdown.toString()+"\","+addNumber+")' >";
+    var deleteRepoButton = "<br><input id='delete" + id + "' type='button' value='Eliminar' class=\"waves-effect waves-teal btn-flat\" onclick='deleteRepo(\""+dropdown.toString()+"\","+addNumber+")' >";
 
-    item+=(nombre);
-    item+=(copyNombre);
-    item+=("    ");
-    item+=(dspace);
-    item+=(copyDspace);
-    item+=("    ");
-    item+=(deleteRepo);
-	console.log(item);
+    cardHTML+=(nombreTextBox);
+    cardHTML+=(copyNombreButton);
+    cardHTML+=("    ");
+    cardHTML+=(dspaceTextBox);
+    cardHTML+=(copyDspaceButton);
+    cardHTML+=("    ");
+    cardHTML+=(deleteRepoButton);
+	console.log(cardHTML);
 
 
-    setSelection(dropdown, item);
+    setSelection(dropdown, cardHTML);
 
     parent.innerHTML = (getSelections(dropdown));
     checkResultCards();
@@ -257,8 +266,11 @@ function fillFirstCombo(contents) {
     var listItems = '<option selected="selected" disabled="disabled" value="0">Seleccione un área de conocimiento.</option>';
 
     for (var i = 0; i < jsonResponse.campos.length; i++) {
-        listItems += "<option value='" + jsonResponse.campos[i].idArea + "'>" + jsonResponse.campos[i].descripcion + "</option>";
+        listItems += "<option value='" + jsonResponse.campos[i].idArea +","+ jsonResponse.campos[i].cveArea + "'>"+ jsonResponse.campos[i].descripcion + "</option>";
     }
+
+    console.log("cveArea:",jsonResponse.campos[0].cveArea);
+    console.log("campos:", jsonResponse.campos[0]);
 
     $("#areasConocimiento").html(listItems);
     reloadMaterialSelects();
@@ -271,7 +283,7 @@ function fillSecondCombo(contents) {
     var listItems = '<option selected="selected" disabled="disabled" value="0">Seleccione un campo de conocimiento.</option>';
 
     for (var i = 0; i < jsonResponse.campos.length; i++) {
-        listItems += "<option value='" + jsonResponse.campos[i].idCampo + "'>" + jsonResponse.campos[i].descripcion + "</option>";
+        listItems += "<option value='" + jsonResponse.campos[i].idCampo + ","+ jsonResponse.campos[i].cveCampo + "'>" + jsonResponse.campos[i].descripcion + "</option>";
     }
 
     $("#camposConocimiento").html(listItems);
@@ -287,7 +299,7 @@ function fillThirdCombo(contents) {
     var listItems = '<option selected="selected" disabled="disabled" value="0">Seleccione una disciplina de conocimiento</option>';
 
     for (var i = 0; i < jsonResponse.campos.length; i++) {
-        listItems += "<option value='" + jsonResponse.campos[i].idDisciplina + "'>" + jsonResponse.campos[i].descripcion + "</option>";
+        listItems += "<option value='" + jsonResponse.campos[i].idDisciplina + ","+ jsonResponse.campos[i].cveDisciplina + "'>" + jsonResponse.campos[i].descripcion + "</option>";
     }
 
     $("#disciplinasConocimiento").html(listItems);
@@ -303,7 +315,7 @@ function fillForthCombo(contents) {
     var listItems = '<option selected="selected" disabled="disabled" value="0">Seleccione una subdisciplina de conocimiento</option>';
 
     for (var i = 0; i < jsonResponse.campos.length; i++) {
-        listItems += "<option value='" + jsonResponse.campos[i].idSubdisciplina + "'>" + jsonResponse.campos[i].descripcion + "</option>";
+        listItems += "<option value='" + jsonResponse.campos[i].idSubdisciplina + ","+ jsonResponse.campos[i].cveSubdisciplina + "'>"  + jsonResponse.campos[i].descripcion + "</option>";
     }
 
     $("#subdisciplinasConocimiento").html(listItems);

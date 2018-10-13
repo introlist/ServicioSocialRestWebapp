@@ -35,9 +35,6 @@
             </ul>
         </div>
     </nav>
-
-
-
 </head>
 <body style="background: #F0F0F0">
 <!-- #D59F0F -->
